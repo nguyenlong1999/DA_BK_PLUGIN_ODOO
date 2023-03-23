@@ -589,10 +589,9 @@
                         <div class="col-md-6 col-xl-4" id="product_details">
                             <t t-set="base_url" t-value="product.get_base_url()"/>
                             <h1 itemprop="name" t-field="product.name">Product Name</h1>
-                            <h3 itemprop="brand" t-field="product.product_brand_id">Brand Name</h3>
-                            <img class="o_carousel_product_card_img_top card-img-top"
-                                 t-attf-src="/web/image/product.brand/#{product.product_brand_id.logo}"
-                            />
+                            <img itemprop="image" width="100px" height="100px" class="img"
+                                 t-attf-src="/website/image/product.brand/#{product.product_brand_id.id}/logo#{'?max_width=150&amp;max_height=150'}"/>
+                            <h4 itemprop="brand" string="Brand: " t-field="product.product_brand_id">Product Brands</h4>
                             <span itemprop="image" style="display:none;"
                                   t-esc="base_url + website.image_url(product, 'image_1920')"/>
                             <form t-if="product._is_add_to_cart_possible()" action="/shop/cart/update" method="POST">
