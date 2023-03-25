@@ -87,10 +87,17 @@ publicWidget.registry.WebsiteSale.include({
             //xử lý lấy giá trị vừa tìm kiếm lưu vào cookie
             var search = $this.find('input.search-query');
             var get_data = utils.get_cookie('history_search');
-            if (get_data)
-                utils.set_cookie('history_search', search.val() + '|' + get_data);
-            else
-                utils.set_cookie('history_search', search.val());
+           if (get_data) {
+                    var arr = get_data.split('|');
+                    if (arr.length >= 10) {
+                        var index = get_data.lastIndexOf("|");
+                        get_data.slice(index, get_data.length);
+                        utils.set_cookie('history_search', search.val() + '|' + get_data.replace(get_data.slice(index, get_data.length),''));
+                    } else {
+                        utils.set_cookie('history_search', search.val() + '|' + get_data);
+                    }
+                } else
+                    utils.set_cookie('history_search', search.val());
 
             //điều hướng
             window.location = oldurl + '&' + search.attr('name') + '=' + encodeURIComponent(search.val());
